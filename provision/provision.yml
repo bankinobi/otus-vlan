@@ -1,0 +1,68 @@
+---
+- name: Provision inetRouter
+  hosts: inetRouter
+  become: yes
+
+  vars:
+    ipaddr: "192.168.255.1"
+
+  roles:
+    - network-lab
+
+- name: Provision CentralRouter
+  hosts: centralRouter
+  become: yes
+
+  vars:
+    ipaddr: "192.168.255.2"
+
+  roles:
+    - network-lab
+
+- name: Provision testServer1
+  hosts: testServer1
+  become: yes
+
+  vars:
+    vlan:
+      ipaddr: 10.10.10.1
+      device: eth1.1
+
+  roles: 
+    - network-lab
+
+- name: Provision testServer2
+  hosts: testServer2
+  become: yes
+
+  vars:
+    vlan:
+      ipaddr: 10.10.10.1
+      device: eth1.2
+
+  roles: 
+    - network-lab
+
+- name: Provision testClient1
+  hosts: testClient1
+  become: yes
+
+  vars:
+    vlan:
+      ipaddr: 10.10.10.254
+      device: eth1.1
+
+  roles: 
+    - network-lab
+
+- name: Provision testClient2
+  hosts: testClient2
+  become: yes
+
+  vars:
+    vlan:
+      ipaddr: 10.10.10.254
+      device: eth1.2
+
+  roles: 
+    - network-lab

@@ -1,0 +1,8 @@
+---
+- name: Include bonding tasks
+  include_tasks: bond.yml
+  when: '"test" not in inventory_hostname'
+
+- name: Include vlan tasks
+  include_tasks: vlan.yml
+  when: '"test" in inventory_hostname'

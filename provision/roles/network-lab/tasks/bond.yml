@@ -1,0 +1,15 @@
+---
+- name: Template bond0 master interface
+  template:
+    src: ifcfg-bond-master.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-bond0
+  notify: reboot host
+
+- name: Template bond slave interfaces
+  template:
+    src: ifcfg-bond-slave.j2
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ item }}"
+  loop:
+    - eth1
+    - eth2
+  notify: reboot host

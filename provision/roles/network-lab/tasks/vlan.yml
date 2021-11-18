@@ -1,0 +1,6 @@
+---
+- name: Template vlan interface
+  template:
+    src: ifcfg-vlan.j2
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ vlan.device }}"
+  notify: reboot host
